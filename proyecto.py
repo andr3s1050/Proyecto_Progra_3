@@ -1,8 +1,5 @@
 # Proyecto de Quién quiere ser millonario
 
-# Agregar comodines de 50/50
-# En el submenú de los comodines hay que agregar un mensaje por si ya se utilizó un comodín
-
 import random
 import time
 import sys
@@ -57,7 +54,6 @@ def preguntar():
     pregunta = " ".join(map(str, formato_pregunta))
     print(pregunta)
     comodines()
-    
 
 
 def responder():
@@ -68,7 +64,7 @@ def responder():
         definitiva = str(input("Respuesta definitiva? ")).upper()
 
 
-def comodines():  # Se puede agregar un contador para que indique si ya se usó o no un comodín
+def comodines():
     op = str(input("Desea utilizar un comodín? ")).upper()
     if op == "SI":
         print("\n1. 50/50")
@@ -90,40 +86,6 @@ def comodines():  # Se puede agregar un contador para que indique si ya se usó 
         comodines()
 
 
-def cincuentaxcincuenta():  # Hay que validar que no elimine la respuesta correcta
-    global respuesta_correcta
-    respuesta_correcta = millonario[numero_pregunta][6]
-    cincuenta1 = random.choice(millonario[numero_pregunta][1:5])
-    cincuenta2 = random.choice(millonario[numero_pregunta][1:5])
-    if cincuenta1 != respuesta_correcta and cincuenta2 != respuesta_correcta and cincuenta1 != cincuenta2:
-        # es una prueba, se puede eliminar
-        print("///////////////////////"+cincuenta1)
-        # es una prueba, se puede eliminar
-        print("///////////////////////"+cincuenta2)
-        cincuenta1_index = millonario.index(cincuenta1)
-        cincuenta2_index = millonario.index(cincuenta2)
-        millonario[cincuenta1_index] = ""
-        millonario[cincuenta2_index] = ""
-        millonario[numero_pregunta].remove(cincuenta1)
-        millonario[numero_pregunta].remove(cincuenta2)
-    else:
-        while cincuenta1 == respuesta_correcta or cincuenta2 == respuesta_correcta:
-            cincuenta1 = random.choice(millonario[numero_pregunta][1:5])
-            cincuenta2 = random.choice(millonario[numero_pregunta][1:5])
-            if cincuenta1 != respuesta_correcta and cincuenta2 != respuesta_correcta:
-                print("///////////////////////"+cincuenta1)
-                print("///////////////////////"+cincuenta2)
-                cincuenta1_index = millonario.index(cincuenta1)
-                cincuenta2_index = millonario.index(cincuenta2)
-                millonario[cincuenta1_index] = ""
-                millonario[cincuenta2_index] = ""
-                # lista[n].remove(cincuenta1)
-                # lista[n].remove(cincuenta2)
-                break
-    formato_pregunta = millonario[numero_pregunta][0:5]
-    pregunta = " ".join(map(str, formato_pregunta))
-    print(pregunta)
-
 def cincuenta():
     global respuesta_correcta
     respuesta_correcta = millonario[numero_pregunta][6]
@@ -131,17 +93,12 @@ def cincuenta():
     cincuenta2 = random.choice(millonario[numero_pregunta][1:5])
     if cincuenta1 != respuesta_correcta and cincuenta2 != respuesta_correcta and cincuenta1 != cincuenta2:
         borrar = {cincuenta1, cincuenta2}
-        millonario[numero_pregunta] = [ele for ele in millonario[numero_pregunta] if ele not in borrar]
-    # else:
-    #     while cincuenta1 == respuesta_correcta or cincuenta2 == respuesta_correcta or cincuenta1 == cincuenta2:
-    #         cincuenta1 = random.choice(millonario[numero_pregunta][1:5])
-    #         cincuenta2 = random.choice(millonario[numero_pregunta][1:5])
-    #         if cincuenta1 != respuesta_correcta and cincuenta2 != respuesta_correcta:
-    #             borrar = {cincuenta1, cincuenta2}
-    #             millonario[numero_pregunta] = [ele for ele in millonario[numero_pregunta] if ele not in borrar]
+        millonario[numero_pregunta] = [
+            ele for ele in millonario[numero_pregunta] if ele not in borrar]
     formato_pregunta = millonario[numero_pregunta][0:3]
     pregunta = " ".join(map(str, formato_pregunta))
     print("\n" + pregunta)
+
 
 def videollamada():
     print("\nA cuál conocido desea llamar?")
@@ -160,6 +117,7 @@ def videollamada():
         opc_luisa = random.choice(millonario[numero_pregunta][1:5])
         print("Luisa considera que la respuesta correcta es:", opc_luisa)
 
+
 def retirarse():
     opcion = str(input("Desea retirarse del juego? ")).upper()
     if opcion == "SI":
@@ -168,7 +126,7 @@ def retirarse():
         sys.exit()
     elif opcion == "NO":
         responder()
-    else: 
+    else:
         print("Opción inválida")
         retirarse()
 
