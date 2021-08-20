@@ -10,10 +10,10 @@
 
 El propósito de este proyecto es simular el juego ¿Quién quiere ser millonario?
 
-## Technologies
+## Tecnologías
 
 - Python
 
-# Status
+# Estado
 
 Este proyecto está terminado, pero se pueden realizar mejoras en su código.
